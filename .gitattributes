@@ -1,3 +1,6 @@
 *.coffee linguist-language=CoffeeScript
+*.js linguist-language=CoffeeScript
 *.tex linguist-language=LaTeX
+*.md linguist-language=LaTeX
+*.yml linguist-language=LaTeX
 *.lol linguist-language=LOLCODE
