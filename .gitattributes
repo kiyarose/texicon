@@ -1,0 +1,3 @@
+*.coffee linguist-language=CoffeeScript
+*.tex linguist-language=LaTeX
+*.lol linguist-language=LOLCODE
