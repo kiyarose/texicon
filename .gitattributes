@@ -1,9 +1,9 @@
 *.coffee linguist-language=CoffeeScript
 *.js linguist-language=CoffeeScript
-*.tex linguist-language=LaTeX
-*.md linguist-language=LaTeX
-*.ts linguist-language=LaTeX
-*.sty  linguist-language=LaTeX
-items/** linguist-language=TeX
-blocks/** linguist-language=TeX
+*.tex linguist-language=LaTeX linguist-documentation=false
+*.md linguist-language=LaTeX linguist-documentation=false
+*.ts linguist-language=LaTeX linguist-documentation=false
+*.sty linguist-language=LaTeX linguist-documentation=false
+items/** linguist-language=TeX linguist-detectable=true
+blocks/** linguist-language=TeX linguist-detectable=true
 *.lol linguist-language=LOLCODE
