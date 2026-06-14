@@ -1,0 +1,97 @@
+<div id="game-root" class="game-root">
+  <div
+    id="game-stage"
+    class="game-stage"
+    phx-hook="GameCanvas"
+    phx-update="ignore"
+    data-seed={@run_seed}
+    data-status={@status}
+  >
+    <div id="game-canvas-wrap">
+      <canvas id="game-canvas"></canvas>
+    </div>
+
+    <div id="game-hud" class="game-hud">
+      <div class="hud-row">
+        <span id="hud-distance">0{@hud.distance_suffix}</span>
+        <span id="hud-best">{@hud.best_label} {@high_score.best_distance}{@hud.distance_suffix}</span>
+        <span class="hud-version">v{@version}</span>
+      </div>
+      <div class="hud-row">
+        <span id="hud-seed">{@hud.seed_label} {@run_seed}</span>
+        <button type="button" id="hud-copy-seed" class="hud-btn">{@hud.copy_btn}</button>
+      </div>
+      <div id="hud-inventory" class="hud-inventory">
+        <div class="inv-slot" data-slot="0">
+          <span class="inv-key">1</span>
+          <span class="inv-name">{@hud.empty_slot}</span>
+          <span class="inv-uses"></span>
+        </div>
+        <div class="inv-slot" data-slot="1">
+          <span class="inv-key">2</span>
+          <span class="inv-name">{@hud.empty_slot}</span>
+          <span class="inv-uses"></span>
+        </div>
+        <div class="inv-slot" data-slot="2">
+          <span class="inv-key">3</span>
+          <span class="inv-name">{@hud.empty_slot}</span>
+          <span class="inv-uses"></span>
+        </div>
+      </div>
+      <div class="hud-row hud-inventory-hint">
+        <span>{@hud.inventory_hint}</span>
+      </div>
+      <div class="hud-row hud-lol">
+        <span>{@ui.lol_label}</span>
+      </div>
+    </div>
+
+    <div id="debug-panel" class={"debug-panel #{if @debug_mode, do: "", else: "hidden"}"} phx-update="ignore">
+      <div class="debug-header">Debug (D toggle · G grant)</div>
+      <div class="debug-row">
+        <button type="button" data-debug-action="toggle-hitboxes" class="hud-btn">Hitboxes</button>
+        <button type="button" data-debug-action="toggle-entry" class="hud-btn">Entry Y</button>
+        <button type="button" data-debug-action="refill" class="hud-btn">Refill</button>
+      </div>
+      <div class="debug-row">
+        <button type="button" data-debug-action="spawn" data-prop-kind="crate" class="hud-btn">Crate</button>
+        <button type="button" data-debug-action="spawn" data-prop-kind="bomb" class="hud-btn">Bomb</button>
+        <button type="button" data-debug-action="spawn" data-prop-kind="spring" class="hud-btn">Spring</button>
+      </div>
+      <div class="debug-items">
+        <%= for item <- @items do %>
+          <button
+            type="button"
+            data-debug-action="grant"
+            data-item-id={item["id"]}
+            class="hud-btn debug-item-btn"
+          >
+            {item["name"]}
+          </button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div id="game-overlay" class={"game-overlay #{@status}"}>
+    <%= case @status do %>
+      <% :ready -> %>
+        <div class="overlay-panel">
+          <h1>{@ui.title}</h1>
+          <p>{@ui.subtitle}</p>
+          <p class="hint">{@ui.hint}</p>
+          <p class="lol-footer">{@build} · v{@version}</p>
+          <button phx-click="start_game" class="overlay-btn">{@ui.start_btn}</button>
+        </div>
+      <% :dead -> %>
+        <div class="overlay-panel">
+          <h1>{@ui.dead_title}</h1>
+          <p id="overlay-distance">Distance: {@current_distance || 0}m</p>
+          <p>Best: {@high_score.best_distance}m</p>
+          <p>Seed: {@run_seed}</p>
+          <button phx-click="restart" class="overlay-btn">{@ui.retry_btn}</button>
+        </div>
+      <% _ -> %>
+    <% end %>
+  </div>
+</div>
