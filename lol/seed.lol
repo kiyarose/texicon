@@ -1,0 +1,11 @@
+HAI 1.3
+OBTW Seed logic for Texicon — compiled to Elixir at build time
+TLDR
+
+I HAS A MAX SEED ITZ 999999999
+
+HOW IIZ NEW SEED
+    FOUND YR SUM OF 1 AN RAND OF MAX SEED
+IF U SAY SO
+
+KTHXBYE
