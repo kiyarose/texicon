@@ -5,4 +5,5 @@
 *.yml linguist-language=LaTeX
 *.sty  linguist-language=LaTeX
 items/** linguist-language=TeX
+blocks/** linguist-language=TeX
 *.lol linguist-language=LOLCODE
