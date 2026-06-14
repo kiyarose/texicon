@@ -3,4 +3,6 @@
 *.tex linguist-language=LaTeX
 *.md linguist-language=LaTeX
 *.yml linguist-language=LaTeX
+*.sty  linguist-language=LaTeX
+items/** linguist-language=TeX
 *.lol linguist-language=LOLCODE
