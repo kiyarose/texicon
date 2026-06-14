@@ -5,14 +5,16 @@ defmodule Texicon.Lol.LevelParser do
 
   @prop_kinds ~w(spring crate bomb pendulum)
 
-  @meta_keys %{
-    "entry_y" => ~r/^entry[\s_]*y$/i,
-    "exit_y" => ~r/^exit[\s_]*y$/i,
-    "item" => ~r/^item$/i,
-    "music_bpm" => ~r/^music[\s_]*bpm$/i,
-    "needs_item" => ~r/^needs[\s_]*item$/i,
-    "spawn_row" => ~r/^spawn[\s_]*row$/i
-  }
+  defp meta_key_patterns do
+    %{
+      "entry_y" => ~r/^entry[\s_]*y$/i,
+      "exit_y" => ~r/^exit[\s_]*y$/i,
+      "item" => ~r/^item$/i,
+      "music_bpm" => ~r/^music[\s_]*bpm$/i,
+      "needs_item" => ~r/^needs[\s_]*item$/i,
+      "spawn_row" => ~r/^spawn[\s_]*row$/i
+    }
+  end
 
   def parse_file(root, rel_path) do
     source = root |> Path.join(rel_path) |> File.read!()
@@ -176,7 +178,7 @@ defmodule Texicon.Lol.LevelParser do
   defp normalize_meta_key(raw) do
     key = raw |> String.trim() |> String.replace(~r/\s+/, "_") |> String.downcase()
 
-    Enum.find_value(@meta_keys, fn {canonical, pattern} ->
+    Enum.find_value(meta_key_patterns(), fn {canonical, pattern} ->
       if Regex.match?(pattern, key), do: canonical
     end)
   end
